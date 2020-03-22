@@ -113,6 +113,13 @@
     <Compile Include="AmplitudeMod.cs" />
     <Compile Include="AmplitudeModWriter.cs" />
     <Compile Include="BaseSound.cs" />
+    <Compile Include="ConnectionStyle\SoundBox.cs" />
+    <Compile Include="ConnectionStyle\IOutputable.cs" />
+    <Compile Include="ConnectionStyle\SoundBoxBase.cs" />
+    <Compile Include="ConnectionStyle\SoundBoxBaseOutputValue.cs" />
+    <Compile Include="ConnectionStyle\SoundBoxModulatedBase.cs" />
+    <Compile Include="ConnectionStyle\SoundBoxWave.cs" />
+    <Compile Include="ConnectionStyle\SoundStream.cs" />
     <Compile Include="FrequencyMod.cs" />
     <Compile Include="FrequencyModWriter.cs" />
     <Compile Include="IEffect.cs" />
@@ -185,6 +192,7 @@
   <ItemGroup>
     <Content Include="Todo.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -100,10 +100,25 @@ namespace SoundWave
             return new RawSourceWaveStream(sampleStream, new WaveFormat(playbackRate.PitchAsIntHz, playbackBits, playbackChannels));
         }
 
+        private IWaveProvider GetProvider2()
+        {
+            int playbackRate = 48000;
+            int playbackBits = 32;
+            int playbackChannels = 2;
+            double playbackDuration = 4.5; //seconds
+
+            var soundStream = new ConnectionStyle.SoundStream(playbackDuration, playbackRate, playbackBits, playbackChannels);
+            ConnectionStyle.SoundBoxWave sound1 = new ConnectionStyle.SoundBoxWave();
+
+            soundStream.AddValueOutputableForChannel(2, sound1.GetValueOutputable());
+            soundStream.WriteAll();
+            return new RawSourceWaveStream(soundStream, new WaveFormat(playbackRate, playbackBits, playbackChannels));
+        }
+
         private void btnPlaySound_Click(object sender, EventArgs e)
         {
             WaveOut waveOut = new WaveOut(this.Handle);
-            waveOut.Init(GetProvider());
+            waveOut.Init(GetProvider2());
             waveOut.Play();
         }
 
@@ -111,7 +126,7 @@ namespace SoundWave
         {
             //WaveFileWriter waveFileWriter = new WaveFileWriter("file.wav", GetProvider().WaveFormat);
             //WaveStream sourceStream = new NullWaveStream(GetProvider().WaveFormat, 10000);
-            WaveFileWriter.CreateWaveFile("file.wav", GetProvider());
+            WaveFileWriter.CreateWaveFile("file.wav", GetProvider2());
         }
     }
 }
