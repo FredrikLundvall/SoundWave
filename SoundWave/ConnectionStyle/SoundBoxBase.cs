@@ -8,7 +8,7 @@ namespace SoundWave.ConnectionStyle
 {
     public abstract class SoundBoxBase
     {
-        abstract public double OutputValue(double aMomentInSeconds);
+        abstract public Output OutputValue(double aMomentInSeconds);
         public IOutputable GetValueOutputable()
         {
             return new SoundBoxBaseOutputValue(this);

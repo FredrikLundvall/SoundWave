@@ -8,6 +8,6 @@ namespace SoundWave.ConnectionStyle
 {
     public interface IOutputable
     {
-        double Output(double aMomentInSeconds);
+        Output Output(double aMomentInSeconds);
     }
 }

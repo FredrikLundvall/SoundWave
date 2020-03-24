@@ -26,24 +26,22 @@ namespace SoundWave.ConnectionStyle
             this.Position = 0;
             double sampleStepDuration = GetTimeForOneSample();
             int numberOfSamples = (int)this.Length / ((fSampleBits / 8) * fSampleChannels);
-            for (int channel = 1; channel <= fSampleChannels; channel++)
+            double momentInSeconds = 0;
+            Output value;
+            for(long i = 0; i < numberOfSamples; i++)
             {
-                double momentInSeconds = 0;
-                for (long i = 0; i < numberOfSamples; i++)
+                for (int channel = 1; channel <= fSampleChannels; channel++)
                 {
-                    double value = 0;
+                    value = new Output(0, null);
                     foreach (var valueOutput in fValueOutputListeners[channel])
                     {
                         value += valueOutput.Output(momentInSeconds);
                     }
-                    this.Write(value);
-                    momentInSeconds += sampleStepDuration;
+                    Write(ConvertToBytes(value.Amplitude), 0, fSampleBits / 8);
                 }
+                momentInSeconds += sampleStepDuration;
             }
-        }
-        public void Write(double aValue)
-        {
-            Write(ConvertToBytes(aValue), 0, fSampleBits / 8);
+            this.Position = 0;
         }
         public byte[] ConvertToBytes(double aValue)
         {

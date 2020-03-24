@@ -8,23 +8,19 @@ namespace SoundWave.ConnectionStyle
 {
     public class SoundBoxWave: SoundBoxModulatedBase
     {
-        public SoundBoxWave()
+        override public Output OutputValue(double aMomentInSeconds)
         {
-
-        }
-        override public double OutputValue(double aMomentInSeconds)
-        {
-            double valueFrequency = 0;
+            Output valueFrequency = new Output(0, null);
             foreach (var frequencyOutput in fFrequencyOutputListeners)
             {
                 valueFrequency += frequencyOutput.Output(aMomentInSeconds);
             }
-            double valueAmplitude = 0;
+            Output valueAmplitude = new Output(0, null);
             foreach (var amplitudeOutput in fAmplitudeOutputListeners)
             {
                 valueAmplitude += amplitudeOutput.Output(aMomentInSeconds);
             }
-            return Math.Sin(atPhase.PhaseAsRadians) * valueAmplitude;
+            return new Output(Math.Sin((valueFrequency.Phase ?? 0) * Math.PI * 2) * valueAmplitude.Amplitude, valueFrequency.Phase);
         }
     }
 }

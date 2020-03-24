@@ -13,7 +13,7 @@ namespace SoundWave.ConnectionStyle
         {
             fSoundBox = aSoundBox;
         }
-        public double Output(double aMomentInSeconds)
+        public Output Output(double aMomentInSeconds)
         {
             return fSoundBox.OutputValue(aMomentInSeconds);
         }

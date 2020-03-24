@@ -13,24 +13,24 @@ namespace SoundWave.ConnectionStyle
         {
             fValueOutputListeners.Add(aValueOutputable);
         }
-        override public double OutputValue(double aMomentInSeconds)
+        override public Output OutputValue(double aMomentInSeconds)
         {
-            double valueFrequency = 0;
+            Output valueFrequency = new Output(0, null);
             foreach (var frequencyOutput in fFrequencyOutputListeners)
             {
                 valueFrequency += frequencyOutput.Output(aMomentInSeconds);
             }
-            double value = 0;
+            Output value = new Output(0, null);
             foreach (var valueOutput in fValueOutputListeners)
             {
                 value += valueOutput.Output(aMomentInSeconds);
             }
-            double valueAmplitude = 0;
+            Output valueAmplitude = new Output(0, null);
             foreach (var amplitudeOutput in fAmplitudeOutputListeners)
             {
                 valueAmplitude += amplitudeOutput.Output(aMomentInSeconds);
             }
-            return value * valueAmplitude;
+            return (value * valueAmplitude.Amplitude) + new Output(0, valueFrequency.Phase);
         }
     }
 }

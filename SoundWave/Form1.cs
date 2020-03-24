@@ -10,6 +10,7 @@ using System.Threading;
 using System.IO;
 using System.Windows.Input;
 using NAudio.Wave;
+using SoundWave.ConnectionStyle;
 
 namespace SoundWave
 {
@@ -105,12 +106,17 @@ namespace SoundWave
             int playbackRate = 48000;
             int playbackBits = 32;
             int playbackChannels = 2;
-            double playbackDuration = 4.5; //seconds
+            double playbackDuration = 2; //seconds
 
-            var soundStream = new ConnectionStyle.SoundStream(playbackDuration, playbackRate, playbackBits, playbackChannels);
-            ConnectionStyle.SoundBoxWave sound1 = new ConnectionStyle.SoundBoxWave();
+            var soundStream = new SoundStream(playbackDuration, playbackRate, playbackBits, playbackChannels);
 
-            soundStream.AddValueOutputableForChannel(2, sound1.GetValueOutputable());
+            SoundBoxWave sound1 = new SoundBoxWave();
+            SoundBoxFrequency frequency = new SoundBoxFrequency(220.0);
+            SoundBoxAmplitude amplitude = new SoundBoxAmplitude(1.0);
+            sound1.AddFrequencyOutputable(frequency.GetValueOutputable());
+            sound1.AddAmplitudeOutputable(amplitude.GetValueOutputable());
+
+            soundStream.AddValueOutputableForChannel(1, sound1.GetValueOutputable());
             soundStream.WriteAll();
             return new RawSourceWaveStream(soundStream, new WaveFormat(playbackRate, playbackBits, playbackChannels));
         }
