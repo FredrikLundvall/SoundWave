@@ -15,7 +15,7 @@ namespace SoundWave.ConnectionStyle
         }
         override public Output OutputValue(double aMomentInSeconds)
         {
-            return new Output(fAmplitude, null);
+            return new Output(fAmplitude, null, null);
         }
     }
 

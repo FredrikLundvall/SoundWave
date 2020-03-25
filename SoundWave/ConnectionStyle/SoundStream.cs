@@ -32,7 +32,7 @@ namespace SoundWave.ConnectionStyle
             {
                 for (int channel = 1; channel <= fSampleChannels; channel++)
                 {
-                    value = new Output(0, null);
+                    value = new Output(0, null, null);
                     foreach (var valueOutput in fValueOutputListeners[channel])
                     {
                         value += valueOutput.Output(momentInSeconds);

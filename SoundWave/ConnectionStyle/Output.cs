@@ -11,10 +11,11 @@ namespace SoundWave.ConnectionStyle
         public readonly double Amplitude;
         public readonly double? Frequency;
         public readonly double? Phase;
-        public Output(double aAmplitude, double? aPhase)
+        public Output(double aAmplitude, double? aPhase, double? aFrequency)
         {
             Amplitude = aAmplitude;
             Phase = aPhase;
+            Frequency = aFrequency;
         }
 
         public static double? SumPhase(double? aLeft, double? aRight)
@@ -42,19 +43,25 @@ namespace SoundWave.ConnectionStyle
             return aLeft + aRight;
         }
 
-        public static double SumFrequncy(double aLeft, double aRight)
+        public static double? SumFrequency(double? aLeft, double? aRight)
         {
-            return (aLeft + aRight)  / 2.0;
+            if (aLeft == null && aRight == null)
+                return null;
+            if (aLeft != null)
+                return aLeft;
+            if (aRight != null)
+                return aRight;
+            return ((aLeft ?? 0) + (aRight ?? 0))  / 2.0;
         }
 
         public static Output operator +(Output aLeft, Output aRight)
         {
-            return new Output(SumAmplitude(aLeft.Amplitude, aRight.Amplitude), SumPhase(aLeft.Phase, aRight.Phase));
+            return new Output(SumAmplitude(aLeft.Amplitude, aRight.Amplitude), SumPhase(aLeft.Phase, aRight.Phase), SumFrequency(aLeft.Frequency, aRight.Frequency));
         }
 
-        public static Output operator *(Output aLeft, double aRight)
+        public static Output MultiplyAmplitude(Output aOutput, double aAmplitude)
         {
-            return new Output(aLeft.Amplitude * aRight, aLeft.Phase);
+            return new Output(aOutput.Amplitude * aAmplitude, aOutput.Phase, aOutput.Frequency);
         }
 
     }

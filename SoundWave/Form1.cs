@@ -110,10 +110,31 @@ namespace SoundWave
 
             var soundStream = new SoundStream(playbackDuration, playbackRate, playbackBits, playbackChannels);
 
+            //SoundBoxWave sound1 = new SoundBoxWave();
+            //SoundBoxFrequency frequency = new SoundBoxFrequency(220.0);
+            //SoundBoxAmplitude amplitude = new SoundBoxAmplitude(1.0);
+            //sound1.AddFrequencyOutputable(frequency.GetValueOutputable());
+            //sound1.AddAmplitudeOutputable(amplitude.GetValueOutputable());
+
+            //SoundBoxWave soundFM = new SoundBoxWave();
+            //SoundBoxFrequency frequencyFM = new SoundBoxFrequency(5.0);
+            //SoundBoxAmplitude amplitudeFM = new SoundBoxAmplitude(1.0);
+            //sound1.AddFrequencyOutputable(soundFM.GetValueOutputable());
+
+            //SoundBox sound2 = new SoundBox();
+            //SoundBoxFrequency frequencyMod = new SoundBoxFrequency(5.0);
+            //sound2.AddFrequencyOutputable(frequencyMod.GetValueOutputable());
+            //sound2.AddValueOutputable(sound1.GetValueOutputable());
+
+            SoundBoxWave soundFM = new SoundBoxWave();
+            SoundBoxFrequency frequencyFM = new SoundBoxFrequency(50.0);
+            SoundBoxAmplitude amplitudeFM = new SoundBoxAmplitude(1.0);
+            soundFM.AddFrequencyOutputable(frequencyFM.GetValueOutputable());
+            soundFM.AddAmplitudeOutputable(amplitudeFM.GetValueOutputable());
+
             SoundBoxWave sound1 = new SoundBoxWave();
-            SoundBoxFrequency frequency = new SoundBoxFrequency(220.0);
             SoundBoxAmplitude amplitude = new SoundBoxAmplitude(1.0);
-            sound1.AddFrequencyOutputable(frequency.GetValueOutputable());
+            sound1.AddFrequencyOutputable(soundFM.GetValueOutputable());
             sound1.AddAmplitudeOutputable(amplitude.GetValueOutputable());
 
             soundStream.AddValueOutputableForChannel(1, sound1.GetValueOutputable());

@@ -10,17 +10,17 @@ namespace SoundWave.ConnectionStyle
     {
         override public Output OutputValue(double aMomentInSeconds)
         {
-            Output valueFrequency = new Output(0, null);
+            Output valueFrequency = new Output(0, null, null);
             foreach (var frequencyOutput in fFrequencyOutputListeners)
             {
                 valueFrequency += frequencyOutput.Output(aMomentInSeconds);
             }
-            Output valueAmplitude = new Output(0, null);
+            Output valueAmplitude = new Output(0, null, null);
             foreach (var amplitudeOutput in fAmplitudeOutputListeners)
             {
                 valueAmplitude += amplitudeOutput.Output(aMomentInSeconds);
             }
-            return new Output(Math.Sin((valueFrequency.Phase ?? 0) * Math.PI * 2) * valueAmplitude.Amplitude, valueFrequency.Phase);
+            return new Output(Math.Sin((valueFrequency.Phase ?? 0) * Math.PI * 2) * valueAmplitude.Amplitude, valueFrequency.Phase, valueFrequency.Frequency);
         }
     }
 }
