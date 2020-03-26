@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace SoundWave.ConnectionStyle
 {
-    public interface IOutputable
+    public interface IOuputableValue
     {
-        Output Output(double aMomentInSeconds);
-        IOutputable SignalOutput();
+        IOutputable GetValueOutSignal();
     }
 }

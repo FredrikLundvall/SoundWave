@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace SoundWave.ConnectionStyle
 {
-    public abstract class SoundBoxBase
+    public abstract class SoundBoxBase : IOutputable
     {
-        abstract public Output OutputValue(double aMomentInSeconds);
-        public IOutputable GetValueOutputable()
+        abstract public Output Output(double aMomentInSeconds);
+        public IOutputable GetValueOutSignal()
         {
-            return new SoundBoxBaseOutputValue(this);
+            return this;
         }
     }
 }

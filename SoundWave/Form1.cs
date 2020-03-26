@@ -129,15 +129,15 @@ namespace SoundWave
             SoundBoxWave soundFM = new SoundBoxWave();
             SoundBoxFrequency frequencyFM = new SoundBoxFrequency(50.0);
             SoundBoxAmplitude amplitudeFM = new SoundBoxAmplitude(1.0);
-            soundFM.AddFrequencyOutputable(frequencyFM.GetValueOutputable());
-            soundFM.AddAmplitudeOutputable(amplitudeFM.GetValueOutputable());
+            soundFM.FrequencyInput(frequencyFM.SignalOutput());
+            soundFM.AmplitudeInput(amplitudeFM.SignalOutput());
 
             SoundBoxWave sound1 = new SoundBoxWave();
             SoundBoxAmplitude amplitude = new SoundBoxAmplitude(1.0);
-            sound1.AddFrequencyOutputable(soundFM.GetValueOutputable());
-            sound1.AddAmplitudeOutputable(amplitude.GetValueOutputable());
+            sound1.FrequencyInput(soundFM.SignalOutput());
+            sound1.AmplitudeInput(amplitude.SignalOutput());
 
-            soundStream.AddValueOutputableForChannel(1, sound1.GetValueOutputable());
+            soundStream.SignalInput(1, sound1.SignalOutput());
             soundStream.WriteAll();
             return new RawSourceWaveStream(soundStream, new WaveFormat(playbackRate, playbackBits, playbackChannels));
         }

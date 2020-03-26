@@ -76,7 +76,7 @@ namespace SoundWave.ConnectionStyle
         {
             return 1.0 / fSampleRateHz;
         }
-        public void AddValueOutputableForChannel(int aChannel, IOutputable aValueOuputable)
+        public void SignalInput(int aChannel, IOutputable aValueOuputable)
         {
             if (aChannel < 1 || aChannel > fSampleChannels)
                 throw new ArgumentOutOfRangeException("aChannel");

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SoundWave.ConnectionStyle
 {
-    public class SoundBoxFrequency : SoundBoxBase
+    public class SoundBoxFrequency : IOutputable
     {
         protected readonly double fFrequency;
         public SoundBoxFrequency(double aFrequency)
@@ -19,9 +19,14 @@ namespace SoundWave.ConnectionStyle
             return a - b * Math.Floor(a / b);
         }
 
-        override public Output OutputValue(double aMomentInSeconds)
+        public Output Output(double aMomentInSeconds)
         {
-            return new Output(fFrequency, nfmod(aMomentInSeconds / (1.0 / fFrequency), 1.0), fFrequency);
+            return new Output(0, nfmod(aMomentInSeconds / (1.0 / fFrequency), 1.0), fFrequency);
+        }
+
+        public IOutputable SignalOutput()
+        {
+            return this;
         }
     }
 }

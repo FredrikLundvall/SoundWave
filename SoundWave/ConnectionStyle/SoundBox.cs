@@ -6,14 +6,24 @@ using System.Threading.Tasks;
 
 namespace SoundWave.ConnectionStyle
 {
-    public class SoundBox: SoundBoxModulatedBase
+    public class SoundBox: IOutputable
     {
         protected readonly List<IOutputable> fValueOutputListeners = new List<IOutputable>();
-        public void AddValueOutputable(IOutputable aValueOutputable)
+        protected readonly List<IOutputable> fAmplitudeOutputListeners = new List<IOutputable>();
+        protected readonly List<IOutputable> fFrequencyOutputListeners = new List<IOutputable>();
+        public void AmplitudeInput(IOutputable aAmplitudeOutputable)
+        {
+            fAmplitudeOutputListeners.Add(aAmplitudeOutputable);
+        }
+        public void FrequencyInput(IOutputable aFrequencyOutputable)
+        {
+            fFrequencyOutputListeners.Add(aFrequencyOutputable);
+        }
+        public void SignalInput(IOutputable aValueOutputable)
         {
             fValueOutputListeners.Add(aValueOutputable);
         }
-        override public Output OutputValue(double aMomentInSeconds)
+        virtual public Output Output(double aMomentInSeconds)
         {
             Output valueFrequency = new Output(0, null, null);
             foreach (var frequencyOutput in fFrequencyOutputListeners)
@@ -30,7 +40,11 @@ namespace SoundWave.ConnectionStyle
             {
                 valueAmplitude += amplitudeOutput.Output(aMomentInSeconds);
             }
-            return Output.MultiplyAmplitude(value, valueAmplitude.Amplitude) + new Output(0, valueFrequency.Phase, valueFrequency.Frequency);
+            return ConnectionStyle.Output.MultiplyAmplitude(value, valueAmplitude.Amplitude) + new Output(0, valueFrequency.Phase, valueFrequency.Frequency);
+        }
+        public IOutputable SignalOutput()
+        {
+            return this;
         }
     }
 }

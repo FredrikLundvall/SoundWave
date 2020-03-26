@@ -117,10 +117,7 @@
     <Compile Include="ConnectionStyle\SoundBox.cs" />
     <Compile Include="ConnectionStyle\IOutputable.cs" />
     <Compile Include="ConnectionStyle\SoundBoxAmplitude.cs" />
-    <Compile Include="ConnectionStyle\SoundBoxBase.cs" />
-    <Compile Include="ConnectionStyle\SoundBoxBaseOutputValue.cs" />
     <Compile Include="ConnectionStyle\SoundBoxFrequency.cs" />
-    <Compile Include="ConnectionStyle\SoundBoxModulatedBase.cs" />
     <Compile Include="ConnectionStyle\SoundBoxWave.cs" />
     <Compile Include="ConnectionStyle\SoundStream.cs" />
     <Compile Include="FrequencyMod.cs" />

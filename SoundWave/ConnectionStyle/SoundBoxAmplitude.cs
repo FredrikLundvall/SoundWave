@@ -6,16 +6,20 @@ using System.Threading.Tasks;
 
 namespace SoundWave.ConnectionStyle
 {
-    public class SoundBoxAmplitude : SoundBoxBase
+    public class SoundBoxAmplitude : IOutputable
     {
         protected readonly double fAmplitude;
         public SoundBoxAmplitude(double aAmplitude)
         {
             fAmplitude = aAmplitude;
         }
-        override public Output OutputValue(double aMomentInSeconds)
+        public Output Output(double aMomentInSeconds)
         {
             return new Output(fAmplitude, null, null);
+        }
+        public IOutputable SignalOutput()
+        {
+            return this;
         }
     }
 
