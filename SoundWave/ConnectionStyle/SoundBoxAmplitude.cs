@@ -8,14 +8,14 @@ namespace SoundWave.ConnectionStyle
 {
     public class SoundBoxAmplitude : IOutputable
     {
-        protected readonly double fAmplitude;
-        public SoundBoxAmplitude(double aAmplitude)
+        protected readonly decimal fAmplitude;
+        public SoundBoxAmplitude(decimal aAmplitude)
         {
             fAmplitude = aAmplitude;
         }
-        public Output Output(double aMomentInSeconds)
+        public Output CalcOutput(decimal aMomentInSeconds)
         {
-            return new Output(fAmplitude, null, null);
+            return new Output(fAmplitude, null);
         }
         public IOutputable SignalOutput()
         {

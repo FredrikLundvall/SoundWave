@@ -1,4 +1,1 @@
-﻿Separate the SoundList writing so the writing of effects and modulation for list is done on all the sounds, only one time.
-Change how frequencymodulation works on the sounds in a track (it has to call every sound or be called from every sound).
-Add frequency as a Output member in the ConnectionStyle
-AmplitudeModulation add of Output should multiply the values
+﻿Add more testcases

@@ -8,20 +8,20 @@ namespace SoundWave.ConnectionStyle
 {
     public class SoundBoxFrequency : IOutputable
     {
-        protected readonly double fFrequency;
-        public SoundBoxFrequency(double aFrequency)
+        protected readonly decimal fFrequency;
+        public SoundBoxFrequency(decimal aFrequency)
         {
             fFrequency = aFrequency;
         }
 
-        static public double nfmod(double a, double b)
-        {
-            return a - b * Math.Floor(a / b);
-        }
+        //static public decimal nfmod(decimal a, decimal b)
+        //{
+        //    return a - b * Math.Floor(a / b);
+        //}
 
-        public Output Output(double aMomentInSeconds)
+        public Output CalcOutput(decimal aMomentInSeconds)
         {
-            return new Output(0, nfmod(aMomentInSeconds / (1.0 / fFrequency), 1.0), fFrequency);
+            return new Output(fFrequency, null);// nfmod(aMomentInSeconds / (1.0 / fFrequency), 1.0));
         }
 
         public IOutputable SignalOutput()

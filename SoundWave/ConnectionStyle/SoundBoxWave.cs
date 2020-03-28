@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using raminrahimzada;
 
 namespace SoundWave.ConnectionStyle
 {
@@ -18,19 +19,21 @@ namespace SoundWave.ConnectionStyle
         {
             fFrequencyOutputListeners.Add(aFrequencyOutputable);
         }
-        public Output Output(double aMomentInSeconds)
+        public Output CalcOutput(decimal aMomentInSeconds)
         {
-            Output valueFrequency = new Output(0, null, null);
+            Output valueFrequency = new Output(null, null);
             foreach (var frequencyOutput in fFrequencyOutputListeners)
             {
-                valueFrequency += frequencyOutput.Output(aMomentInSeconds);
+                valueFrequency = valueFrequency + frequencyOutput.CalcOutput(aMomentInSeconds);
             }
-            Output valueAmplitude = new Output(0, null, null);
+            Output valueAmplitude = new Output(null, null);
             foreach (var amplitudeOutput in fAmplitudeOutputListeners)
             {
-                valueAmplitude += amplitudeOutput.Output(aMomentInSeconds);
+                valueAmplitude = valueAmplitude + amplitudeOutput.CalcOutput(aMomentInSeconds);
             }
-            return new Output(Math.Sin((valueFrequency.Phase ?? 0) * Math.PI * 2) * valueAmplitude.Amplitude, valueFrequency.Phase, valueFrequency.Frequency);
+            decimal? phase = Output.ConvertFrequencyToPhase(aMomentInSeconds, valueFrequency.Value);
+            Output returnValue = new Output((DecimalMath.Sin(((phase ?? 0m)) * DecimalMath.PIx2) * (valueAmplitude.Value ?? 1)), phase);
+            return returnValue;
         }
         public IOutputable SignalOutput()
         {

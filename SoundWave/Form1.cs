@@ -106,7 +106,7 @@ namespace SoundWave
             int playbackRate = 48000;
             int playbackBits = 32;
             int playbackChannels = 2;
-            double playbackDuration = 2; //seconds
+            decimal playbackDuration = 2; //seconds
 
             var soundStream = new SoundStream(playbackDuration, playbackRate, playbackBits, playbackChannels);
 
@@ -126,18 +126,27 @@ namespace SoundWave
             //sound2.AddFrequencyOutputable(frequencyMod.GetValueOutputable());
             //sound2.AddValueOutputable(sound1.GetValueOutputable());
 
-            SoundBoxWave soundFM = new SoundBoxWave();
-            SoundBoxFrequency frequencyFM = new SoundBoxFrequency(50.0);
-            SoundBoxAmplitude amplitudeFM = new SoundBoxAmplitude(1.0);
-            soundFM.FrequencyInput(frequencyFM.SignalOutput());
-            soundFM.AmplitudeInput(amplitudeFM.SignalOutput());
+            SoundBoxWave waveR = new SoundBoxWave();
+            SoundBoxFrequency frequencyR = new SoundBoxFrequency(220.0m);
+            SoundBoxAmplitude amplitudeR = new SoundBoxAmplitude(1.0m);
+            waveR.FrequencyInput(frequencyR.SignalOutput());
+            waveR.AmplitudeInput(amplitudeR.SignalOutput());
 
-            SoundBoxWave sound1 = new SoundBoxWave();
-            SoundBoxAmplitude amplitude = new SoundBoxAmplitude(1.0);
-            sound1.FrequencyInput(soundFM.SignalOutput());
-            sound1.AmplitudeInput(amplitude.SignalOutput());
+            SoundBoxWave waveFmL = new SoundBoxWave();
+            SoundBoxFrequency frequencyFmL = new SoundBoxFrequency(10.0m);
+            SoundBoxAmplitude amplitudeFmL = new SoundBoxAmplitude(10.0m);
+            waveFmL.FrequencyInput(frequencyFmL.SignalOutput());
+            waveFmL.AmplitudeInput(amplitudeFmL.SignalOutput());
 
-            soundStream.SignalInput(1, sound1.SignalOutput());
+            SoundBoxWave waveL = new SoundBoxWave();
+            SoundBoxFrequency frequencyL = new SoundBoxFrequency(220.0m);
+            SoundBoxAmplitude amplitudeL = new SoundBoxAmplitude(1.0m);
+            waveL.FrequencyInput(frequencyL.SignalOutput());
+            waveL.FrequencyInput(waveFmL.SignalOutput());
+            waveL.AmplitudeInput(amplitudeL.SignalOutput());
+
+            soundStream.SignalInput(1, waveL.SignalOutput());
+            //soundStream.SignalInput(2, waveR.SignalOutput());
             soundStream.WriteAll();
             return new RawSourceWaveStream(soundStream, new WaveFormat(playbackRate, playbackBits, playbackChannels));
         }
