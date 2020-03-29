@@ -3,25 +3,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using raminrahimzada;
 
 namespace SoundWave.ConnectionStyle
 {
     public class SoundBoxFrequency : IOutputable
     {
         protected readonly decimal fFrequency;
-        public SoundBoxFrequency(decimal aFrequency)
+        protected readonly decimal fFrequencyFMSpan;
+        protected readonly List<IOutputable> fFrequencyFMOutputListeners = new List<IOutputable>();
+        public SoundBoxFrequency(decimal aFrequency, decimal aFrequencyFMSpan = 0)
         {
             fFrequency = aFrequency;
+            fFrequencyFMSpan = aFrequencyFMSpan;
         }
-
-        //static public decimal nfmod(decimal a, decimal b)
-        //{
-        //    return a - b * Math.Floor(a / b);
-        //}
-
+        public void FrequencyFMInput(IOutputable aFrequencyOutputable)
+        {
+            fFrequencyFMOutputListeners.Add(aFrequencyOutputable);
+        }
         public Output CalcOutput(decimal aMomentInSeconds)
         {
-            return new Output(fFrequency, null);// nfmod(aMomentInSeconds / (1.0 / fFrequency), 1.0));
+            Output valueFMFrequency = new Output(null, null);
+            foreach (var frequencyFMOutput in fFrequencyFMOutputListeners)
+            {
+                valueFMFrequency += frequencyFMOutput.CalcOutput(aMomentInSeconds);
+            }
+            decimal phaseSpan = 0m; 
+            if((valueFMFrequency.Value ?? 0) != 0 && fFrequencyFMSpan != 0)
+                phaseSpan = ((fFrequencyFMSpan != 0m) ? fFrequencyFMSpan / DecimalMath.PIx4 : 0m) * (valueFMFrequency.Value ?? 0);
+            return new Output(fFrequency + (fFrequencyFMSpan * valueFMFrequency.Value), Output.ConvertFrequencyToPhasePosition(aMomentInSeconds, fFrequency) + phaseSpan);
         }
 
         public IOutputable SignalOutput()

@@ -7,7 +7,7 @@ using raminrahimzada;
 
 namespace SoundWave.ConnectionStyle
 {
-    public struct Output : IEquatable<Output>
+    public class Output : IEquatable<Output>
     {
         public readonly decimal? Value;
         public readonly decimal? Phase;
@@ -65,12 +65,22 @@ namespace SoundWave.ConnectionStyle
         //    else
         //        return (1 + aValue) / 2.0;
         //}
-        public static decimal? ConvertFrequencyToPhase(decimal aMomentInSeconds, decimal? aFrequency)
+        public static decimal? ConvertFrequencyToPhasePosition(decimal aMomentInSeconds, decimal? aFrequency)
         {
-            if (aFrequency == null)
+            if (aFrequency == null || aFrequency <= 0)
                 return null;
+            if (aFrequency <= 0)
+                return 0m;
             //return nfmod(aMomentInSeconds / (1 / (aFrequency ?? 1)), 1.0m);
             return (aMomentInSeconds / (1/(aFrequency ?? 1))) % 1.0m;
+        }
+        public static decimal? ConvertFrequencyToPhaseChange(decimal? aFrequency)
+        {
+            if (aFrequency == null || aFrequency <= 0)
+                return null;
+            if (aFrequency <= 0)
+                return 0m;
+            return 1 / (aFrequency ?? 1);
         }
         //public static decimal? RecalcPhase(decimal? aValue, decimal? aPhase)
         //{

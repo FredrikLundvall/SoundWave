@@ -22,6 +22,7 @@
             /// represents 2*PI
             /// </summary>
             public const decimal PIx2 = 6.28318530717958647692528676655900576839433879875021M;
+            public const decimal PIx4 = 12.5663706143591729538505735331180115367886775975004M;
 
             /// <summary>
             /// represents E

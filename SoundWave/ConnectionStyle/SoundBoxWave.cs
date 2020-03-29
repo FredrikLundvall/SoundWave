@@ -31,8 +31,7 @@ namespace SoundWave.ConnectionStyle
             {
                 valueAmplitude = valueAmplitude + amplitudeOutput.CalcOutput(aMomentInSeconds);
             }
-            decimal? phase = Output.ConvertFrequencyToPhase(aMomentInSeconds, valueFrequency.Value);
-            Output returnValue = new Output((DecimalMath.Sin(((phase ?? 0m)) * DecimalMath.PIx2) * (valueAmplitude.Value ?? 1)), phase);
+            Output returnValue = new Output((DecimalMath.Sin(((valueFrequency.Phase ?? 0m)) * DecimalMath.PIx2) * (valueAmplitude.Value ?? 1)), valueFrequency.Phase);
             return returnValue;
         }
         public IOutputable SignalOutput()

@@ -113,6 +113,7 @@
     <Compile Include="AmplitudeMod.cs" />
     <Compile Include="AmplitudeModWriter.cs" />
     <Compile Include="BaseSound.cs" />
+    <Compile Include="ConnectionStyle\ModifierAddValue.cs" />
     <Compile Include="ConnectionStyle\Output.cs" />
     <Compile Include="ConnectionStyle\SoundBox.cs" />
     <Compile Include="ConnectionStyle\IOutputable.cs" />

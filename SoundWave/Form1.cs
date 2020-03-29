@@ -126,27 +126,55 @@ namespace SoundWave
             //sound2.AddFrequencyOutputable(frequencyMod.GetValueOutputable());
             //sound2.AddValueOutputable(sound1.GetValueOutputable());
 
-            SoundBoxWave waveR = new SoundBoxWave();
-            SoundBoxFrequency frequencyR = new SoundBoxFrequency(220.0m);
-            SoundBoxAmplitude amplitudeR = new SoundBoxAmplitude(1.0m);
-            waveR.FrequencyInput(frequencyR.SignalOutput());
-            waveR.AmplitudeInput(amplitudeR.SignalOutput());
+            //SoundBoxWave waveR = new SoundBoxWave();
+            //SoundBoxFrequency frequencyR = new SoundBoxFrequency(220.0m);
+            //SoundBoxAmplitude amplitudeR = new SoundBoxAmplitude(1.0m);
+            //waveR.FrequencyInput(frequencyR.SignalOutput());
+            //waveR.AmplitudeInput(amplitudeR.SignalOutput());
 
-            SoundBoxWave waveFmL = new SoundBoxWave();
-            SoundBoxFrequency frequencyFmL = new SoundBoxFrequency(10.0m);
-            SoundBoxAmplitude amplitudeFmL = new SoundBoxAmplitude(10.0m);
-            waveFmL.FrequencyInput(frequencyFmL.SignalOutput());
-            waveFmL.AmplitudeInput(amplitudeFmL.SignalOutput());
+            //SoundBoxWave waveFmL = new SoundBoxWave();
+            //SoundBoxFrequency frequencyFmL = new SoundBoxFrequency(10.0m);
+            //SoundBoxAmplitude amplitudeFmL = new SoundBoxAmplitude(10.0m);
+            //waveFmL.FrequencyInput(frequencyFmL.SignalOutput());
+            //waveFmL.AmplitudeInput(amplitudeFmL.SignalOutput());
 
-            SoundBoxWave waveL = new SoundBoxWave();
-            SoundBoxFrequency frequencyL = new SoundBoxFrequency(220.0m);
-            SoundBoxAmplitude amplitudeL = new SoundBoxAmplitude(1.0m);
-            waveL.FrequencyInput(frequencyL.SignalOutput());
-            waveL.FrequencyInput(waveFmL.SignalOutput());
-            waveL.AmplitudeInput(amplitudeL.SignalOutput());
+            //SoundBoxWave waveL = new SoundBoxWave();
+            //SoundBoxFrequency frequencyL = new SoundBoxFrequency(220.0m);
+            //SoundBoxAmplitude amplitudeL = new SoundBoxAmplitude(1.0m);
+            //waveL.FrequencyInput(frequencyL.SignalOutput());
+            //waveL.FrequencyInput(waveFmL.SignalOutput());
+            //waveL.AmplitudeInput(amplitudeL.SignalOutput());
 
-            soundStream.SignalInput(1, waveL.SignalOutput());
-            //soundStream.SignalInput(2, waveR.SignalOutput());
+            //soundStream.SignalInput(1, waveL.SignalOutput());
+            ////soundStream.SignalInput(2, waveR.SignalOutput());
+
+
+
+            SoundBoxWave waveFM = new SoundBoxWave();
+            SoundBoxFrequency frequencyFM = new SoundBoxFrequency(3.0m);
+            SoundBoxAmplitude amplitudeFM = new SoundBoxAmplitude(1.0m);
+            waveFM.FrequencyInput(frequencyFM.SignalOutput());
+            waveFM.AmplitudeInput(amplitudeFM.SignalOutput());
+
+            SoundBoxWave wave = new SoundBoxWave();
+            SoundBoxFrequency frequency = new SoundBoxFrequency(220.0m, 10m);
+            SoundBoxAmplitude amplitude = new SoundBoxAmplitude(1.0m);
+            frequency.FrequencyFMInput(waveFM.SignalOutput());
+            wave.FrequencyInput(frequency.SignalOutput());
+            wave.AmplitudeInput(amplitude.SignalOutput());
+
+            //SoundBoxWave wave2 = new SoundBoxWave();
+            //wave2.FrequencyInput(frequency.SignalOutput());
+            //wave2.AmplitudeInput(amplitude.SignalOutput());
+
+            //SoundBox box = new SoundBox();
+            //box.FrequencyInput(waveFM.SignalOutput());
+            //box.FrequencyInput(frequency.SignalOutput());
+            //box.AmplitudeInput(amplitude.SignalOutput());
+            soundStream.SignalInput(1, wave.SignalOutput());
+            //soundStream.SignalInput(2, wave2.SignalOutput());
+            //soundStream.SignalInput(3, waveFM.SignalOutput());
+            //soundStream.SignalInput(4, box.SignalOutput());
             soundStream.WriteAll();
             return new RawSourceWaveStream(soundStream, new WaveFormat(playbackRate, playbackBits, playbackChannels));
         }
