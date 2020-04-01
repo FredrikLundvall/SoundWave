@@ -9,11 +9,11 @@ namespace SoundWave.ConnectionStyle
     public class Output : IEquatable<Output>
     {
         public readonly double? Value;
-        public readonly double? Phase;
-        public Output(double? aValue, double? aPhase)
+        public readonly double? PhaseChange;
+        public Output(double? aValue, double? aPhaseChange)
         {
             Value = aValue;
-            Phase = aPhase;
+            PhaseChange = aPhaseChange;
         }
 
         public static double? SumPhase(double? aLeft, double? aRight)
@@ -91,7 +91,7 @@ namespace SoundWave.ConnectionStyle
         //}
         public static Output operator +(Output aLeft, Output aRight)
         {
-            return new Output(SumAmplitude(aLeft.Value, aRight.Value), SumPhase(aLeft.Phase, aRight.Phase));
+            return new Output(SumAmplitude(aLeft.Value, aRight.Value), SumPhase(aLeft.PhaseChange, aRight.PhaseChange));
         }
 
         public static bool operator ==(Output output1, Output output2)
@@ -106,7 +106,7 @@ namespace SoundWave.ConnectionStyle
 
         public static Output MultiplyAmplitude(Output aOutput, double? aAmplitude)
         {
-            return new Output(aOutput.Value * aAmplitude, aOutput.Phase);
+            return new Output(aOutput.Value * aAmplitude, aOutput.PhaseChange);
         }
 
         static public double nfmod(double a, double b)
@@ -116,7 +116,7 @@ namespace SoundWave.ConnectionStyle
 
         public override string ToString()
         {
-            return String.Format("Value: {0:f6}, Phase: {1:f6}", Value, Phase);
+            return String.Format("Value: {0:f6}, Phase: {1:f6}", Value, PhaseChange);
             ;
         }
 
@@ -128,14 +128,14 @@ namespace SoundWave.ConnectionStyle
         public bool Equals(Output other)
         {
             return EqualityComparer<double?>.Default.Equals(Math.Round(Value ?? 0, 10), Math.Round(other.Value ?? 0, 0)) &&
-                   EqualityComparer<double?>.Default.Equals(Math.Round(Phase ?? 0, 10), Math.Round(other.Phase ?? 0,10));
+                   EqualityComparer<double?>.Default.Equals(Math.Round(PhaseChange ?? 0, 10), Math.Round(other.PhaseChange ?? 0,10));
         }
 
         public override int GetHashCode()
         {
             var hashCode = 981352850;
             hashCode = hashCode * -1521134295 + EqualityComparer<double?>.Default.GetHashCode(Value);
-            hashCode = hashCode * -1521134295 + EqualityComparer<double?>.Default.GetHashCode(Phase);
+            hashCode = hashCode * -1521134295 + EqualityComparer<double?>.Default.GetHashCode(PhaseChange);
             return hashCode;
         }
     }

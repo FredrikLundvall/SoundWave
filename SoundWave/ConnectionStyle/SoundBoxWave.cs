@@ -30,7 +30,7 @@ namespace SoundWave.ConnectionStyle
             {
                 valueAmplitude = valueAmplitude + amplitudeOutput.CalcOutput(aMomentInSeconds, aSampleStepDuration);
             }
-            Output returnValue = new Output((Math.Sin(((valueFrequency.Phase ?? 0)) * Math.PIx2) * (valueAmplitude.Value ?? 1)), valueFrequency.Phase);
+            Output returnValue = new Output((Math.Sin(((valueFrequency.PhaseChange ?? 0)) * SamplePhase.PI2) * (valueAmplitude.Value ?? 1)), valueFrequency.PhaseChange);
             return returnValue;
         }
         public IOutputable SignalOutput()

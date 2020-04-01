@@ -15,15 +15,15 @@ namespace TestSoundWave
             SoundBoxAmplitude amplitude = new SoundBoxAmplitude(1.0);
             wave.FrequencyInput(frequency.SignalOutput());
             wave.AmplitudeInput(amplitude.SignalOutput());
-            Assert.AreEqual<Output>(new Output(0, 0), wave.CalcOutput(0m));
-            Assert.AreEqual<Output>(new Output(1, 0.25), wave.CalcOutput(0.25));
-            Assert.AreEqual<Output>(new Output(0, 0.5), wave.CalcOutput(0.5));
-            Assert.AreEqual<Output>(new Output(-1, 0.75), wave.CalcOutput(0.75));
-            Assert.AreEqual<Output>(new Output(0, 0), wave.CalcOutput(1));
-            Assert.AreEqual<Output>(new Output(1, 0.25), wave.CalcOutput(1.25));
-            Assert.AreEqual<Output>(new Output(0, 0.5), wave.CalcOutput(1.5));
-            Assert.AreEqual<Output>(new Output(-1, 0.75), wave.CalcOutput(1.75));
-            Assert.AreEqual<Output>(new Output(0, 0), wave.CalcOutput(2));
+            Assert.AreEqual<Output>(new Output(0, 0), wave.CalcOutput(0, 0.00002));
+            Assert.AreEqual<Output>(new Output(1, 0.25), wave.CalcOutput(0.25, 0.00002));
+            Assert.AreEqual<Output>(new Output(0, 0.5), wave.CalcOutput(0.5, 0.00002));
+            Assert.AreEqual<Output>(new Output(-1, 0.75), wave.CalcOutput(0.75, 0.00002));
+            Assert.AreEqual<Output>(new Output(0, 0), wave.CalcOutput(1, 0.00002));
+            Assert.AreEqual<Output>(new Output(1, 0.25), wave.CalcOutput(1.25, 0.00002));
+            Assert.AreEqual<Output>(new Output(0, 0.5), wave.CalcOutput(1.5, 0.00002));
+            Assert.AreEqual<Output>(new Output(-1, 0.75), wave.CalcOutput(1.75, 0.00002));
+            Assert.AreEqual<Output>(new Output(0, 0), wave.CalcOutput(2, 0.00002));
         }
         [TestMethod]
         public void TestStaticFrequency50Hz()
@@ -33,15 +33,15 @@ namespace TestSoundWave
             SoundBoxAmplitude amplitude = new SoundBoxAmplitude(1.0);
             wave.FrequencyInput(frequency.SignalOutput());
             wave.AmplitudeInput(amplitude.SignalOutput());
-            Assert.AreEqual<Output>(new Output(0, 0), wave.CalcOutput(0));
-            Assert.AreEqual<Output>(new Output(1, 0.25), wave.CalcOutput(0.005));
-            Assert.AreEqual<Output>(new Output(0, 0.5), wave.CalcOutput(0.01));
-            Assert.AreEqual<Output>(new Output(-1, 0.75), wave.CalcOutput(0.015));
-            Assert.AreEqual<Output>(new Output(0, 0), wave.CalcOutput(0.02));
-            Assert.AreEqual<Output>(new Output(1, 0.25), wave.CalcOutput(0.025));
-            Assert.AreEqual<Output>(new Output(0, 0.5), wave.CalcOutput(0.03));
-            Assert.AreEqual<Output>(new Output(-1, 0.75), wave.CalcOutput(0.035));
-            Assert.AreEqual<Output>(new Output(0, 0), wave.CalcOutput(0.04));
+            Assert.AreEqual<Output>(new Output(0, 0), wave.CalcOutput(0, 0.00002));
+            Assert.AreEqual<Output>(new Output(1, 0.25), wave.CalcOutput(0.005, 0.00002));
+            Assert.AreEqual<Output>(new Output(0, 0.5), wave.CalcOutput(0.01, 0.00002));
+            Assert.AreEqual<Output>(new Output(-1, 0.75), wave.CalcOutput(0.015, 0.00002));
+            Assert.AreEqual<Output>(new Output(0, 0), wave.CalcOutput(0.02, 0.00002));
+            Assert.AreEqual<Output>(new Output(1, 0.25), wave.CalcOutput(0.025, 0.00002));
+            Assert.AreEqual<Output>(new Output(0, 0.5), wave.CalcOutput(0.03, 0.00002));
+            Assert.AreEqual<Output>(new Output(-1, 0.75), wave.CalcOutput(0.035, 0.00002));
+            Assert.AreEqual<Output>(new Output(0, 0), wave.CalcOutput(0.04, 0.00002));
         }
         [TestMethod]
         public void TestStaticFrequency1HzAmplitude10()
@@ -51,15 +51,15 @@ namespace TestSoundWave
             SoundBoxAmplitude amplitude = new SoundBoxAmplitude(10.0);
             wave.FrequencyInput(frequency.SignalOutput());
             wave.AmplitudeInput(amplitude.SignalOutput());
-            Assert.AreEqual<Output>(new Output(0, 0), wave.CalcOutput(0));
-            Assert.AreEqual<Output>(new Output(10, 0.25), wave.CalcOutput(0.25));
-            Assert.AreEqual<Output>(new Output(0, 0.5), wave.CalcOutput(0.5));
-            Assert.AreEqual<Output>(new Output(-10, 0.75), wave.CalcOutput(0.75));
-            Assert.AreEqual<Output>(new Output(0, 0), wave.CalcOutput(1));
-            Assert.AreEqual<Output>(new Output(10, 0.25), wave.CalcOutput(1.25));
-            Assert.AreEqual<Output>(new Output(0, 0.5), wave.CalcOutput(1.5));
-            Assert.AreEqual<Output>(new Output(-10, 0.75), wave.CalcOutput(1.75));
-            Assert.AreEqual<Output>(new Output(0, 0), wave.CalcOutput(2));
+            Assert.AreEqual<Output>(new Output(0, 0), wave.CalcOutput(0, 0.00002));
+            Assert.AreEqual<Output>(new Output(10, 0.25), wave.CalcOutput(0.25, 0.00002));
+            Assert.AreEqual<Output>(new Output(0, 0.5), wave.CalcOutput(0.5, 0.00002));
+            Assert.AreEqual<Output>(new Output(-10, 0.75), wave.CalcOutput(0.75, 0.00002));
+            Assert.AreEqual<Output>(new Output(0, 0), wave.CalcOutput(1, 0.00002));
+            Assert.AreEqual<Output>(new Output(10, 0.25), wave.CalcOutput(1.25, 0.00002));
+            Assert.AreEqual<Output>(new Output(0, 0.5), wave.CalcOutput(1.5, 0.00002));
+            Assert.AreEqual<Output>(new Output(-10, 0.75), wave.CalcOutput(1.75, 0.00002));
+            Assert.AreEqual<Output>(new Output(0, 0), wave.CalcOutput(2, 0.00002));
         }
         [TestMethod]
         public void TestFrequencyModulation1HzDiff1HzOn2Hz()
@@ -75,15 +75,15 @@ namespace TestSoundWave
             wave.FrequencyInput(waveFM.SignalOutput());
             wave.FrequencyInput(frequency.SignalOutput());
             wave.AmplitudeInput(amplitude.SignalOutput());
-            Assert.AreEqual<Output>(new Output(0, 0), wave.CalcOutput(0));
-            //Assert.AreEqual<Output>(new Output(1, 0.25), wave.CalcOutput(0.25));
-            Assert.AreEqual<Output>(new Output(0, 0.5), wave.CalcOutput(0.25));
-            //Assert.AreEqual<Output>(new Output(-1, 0.75), wave.CalcOutput(0.75));
-            Assert.AreEqual<Output>(new Output(0, 0), wave.CalcOutput(0.5));
-            //Assert.AreEqual<Output>(new Output(1, 0.25), wave.CalcOutput(1.25));
-            Assert.AreEqual<Output>(new Output(0, 0.5), wave.CalcOutput(0.75));
-            //Assert.AreEqual<Output>(new Output(-1, 0.75), wave.CalcOutput(1.75));
-            Assert.AreEqual<Output>(new Output(0, 0), wave.CalcOutput(2));
+            //Assert.AreEqual<Output>(new Output(0, 0), wave.CalcOutput(0, 0.00002));
+            //Assert.AreEqual<Output>(new Output(1, 0.25), wave.CalcOutput(0.25, 0.00002));
+            //Assert.AreEqual<Output>(new Output(0, 0.5), wave.CalcOutput(0.25, 0.00002));
+            //Assert.AreEqual<Output>(new Output(-1, 0.75), wave.CalcOutput(0.75, 0.00002));
+            //Assert.AreEqual<Output>(new Output(0, 0), wave.CalcOutput(0.5, 0.00002));
+            //Assert.AreEqual<Output>(new Output(1, 0.25), wave.CalcOutput(1.25, 0.00002));
+            //Assert.AreEqual<Output>(new Output(0, 0.5), wave.CalcOutput(0.75, 0.00002));
+            //Assert.AreEqual<Output>(new Output(-1, 0.75), wave.CalcOutput(1.75, 0.00002));
+            //Assert.AreEqual<Output>(new Output(0, 0), wave.CalcOutput(2, 0.00002));
         }
     }
 }
