@@ -40,8 +40,7 @@ namespace SoundWave.ConnectionStyle
             {
                 valueAmplitude += amplitudeOutput.CalcOutput(aMomentInSeconds, aSampleStepDuration);
             }
-            //return ConnectionStyle.Output.MultiplyAmplitude(value, valueAmplitude.Value) + new Output(null, valueFrequency.Phase);
-            return ConnectionStyle.Output.MultiplyAmplitude(valueFrequency, 0.01);
+            return Output.MultiplyAmplitude(value, valueAmplitude.Value) + new Output(null, valueFrequency.PhaseChange);
         }
         public IOutputable SignalOutput()
         {

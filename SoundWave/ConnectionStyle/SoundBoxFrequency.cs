@@ -27,12 +27,7 @@ namespace SoundWave.ConnectionStyle
             {
                 valueFMFrequency += frequencyFMOutput.CalcOutput(aMomentInSeconds, aSampleStepDuration);
             }
-            double timeSpan = 0;
-            if ((valueFMFrequency.Value ?? 0) != 0 && fFrequencyFMSpan != 0)
-            {
-                timeSpan = aSampleStepDuration * valueFMFrequency.Value * fFrequencyFMSpan ?? 0;
-            }
-            return new Output(fFrequency + (fFrequencyFMSpan * valueFMFrequency.Value), Output.ConvertFrequencyToPhasePosition(aMomentInSeconds, fFrequency));
+            return new Output(fFrequency + (fFrequencyFMSpan * valueFMFrequency.Value), Output.ConvertFrequencyToPhaseChange(aSampleStepDuration, fFrequency + (fFrequencyFMSpan * valueFMFrequency.Value)));
         }
 
         public IOutputable SignalOutput()

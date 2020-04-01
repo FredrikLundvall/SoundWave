@@ -106,7 +106,7 @@ namespace SoundWave
             int playbackRate = 48000;
             int playbackBits = 32;
             int playbackChannels = 2;
-            double playbackDuration = 2; //seconds
+            double playbackDuration = 4; //seconds
 
             var soundStream = new SoundStream(playbackDuration, playbackRate, playbackBits, playbackChannels);
 
@@ -157,7 +157,7 @@ namespace SoundWave
             waveFM.AmplitudeInput(amplitudeFM.SignalOutput());
 
             SoundBoxWave wave = new SoundBoxWave();
-            SoundBoxFrequency frequency = new SoundBoxFrequency(1, 1);
+            SoundBoxFrequency frequency = new SoundBoxFrequency(220, 20);
             SoundBoxAmplitude amplitude = new SoundBoxAmplitude(1.0);
             frequency.FrequencyFMInput(waveFM.SignalOutput());
             wave.FrequencyInput(frequency.SignalOutput());

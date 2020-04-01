@@ -10,6 +10,7 @@ namespace SoundWave.ConnectionStyle
     {
         protected readonly List<IOutputable> fAmplitudeOutputListeners = new List<IOutputable>();
         protected readonly List<IOutputable> fFrequencyOutputListeners = new List<IOutputable>();
+        protected double fPhase = 0;
         public void AmplitudeInput(IOutputable aAmplitudeOutputable)
         {
             fAmplitudeOutputListeners.Add(aAmplitudeOutputable);
@@ -30,7 +31,8 @@ namespace SoundWave.ConnectionStyle
             {
                 valueAmplitude = valueAmplitude + amplitudeOutput.CalcOutput(aMomentInSeconds, aSampleStepDuration);
             }
-            Output returnValue = new Output((Math.Sin(((valueFrequency.PhaseChange ?? 0)) * SamplePhase.PI2) * (valueAmplitude.Value ?? 1)), valueFrequency.PhaseChange);
+            Output returnValue = new Output(Math.Sin(fPhase * SamplePhase.PI2) * (valueAmplitude.Value ?? 1), valueFrequency.PhaseChange);
+            fPhase += (valueFrequency.PhaseChange ?? 0);
             return returnValue;
         }
         public IOutputable SignalOutput()

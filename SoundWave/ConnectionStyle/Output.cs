@@ -16,24 +16,31 @@ namespace SoundWave.ConnectionStyle
             PhaseChange = aPhaseChange;
         }
 
-        public static double? SumPhase(double? aLeft, double? aRight)
+        //public static double? SumPhase(double? aLeft, double? aRight)
+        //{
+        //    if (aLeft == null && aRight == null)
+        //        return null;
+        //    if (aLeft != null && aRight == null)
+        //        return aLeft;
+        //    if (aRight != null && aLeft == null)
+        //        return aRight;
+        //    double aLeftd = (double)aLeft;
+        //    double aRightd = (double)aRight;
+        //    double diffMid = Math.Max(aLeftd, aRightd) - Math.Min(aLeftd, aRightd);
+        //    double diffOverlap = 1 - Math.Max(aLeftd, aRightd) + Math.Min(aLeftd, aRightd);
+        //    double newPhase;
+        //    if (diffMid < diffOverlap)
+        //        newPhase = Math.Min(aLeftd, aRightd) + diffMid / 2;
+        //    else
+        //        newPhase = Math.Max(aLeftd, aRightd) + diffOverlap / 2;
+        //    return newPhase % 1.0;
+        //}
+        public static double? SumPhaseChange(double? aLeft, double? aRight)
         {
             if (aLeft == null && aRight == null)
                 return null;
-            if (aLeft != null && aRight == null)
-                return aLeft;
-            if (aRight != null && aLeft == null)
-                return aRight;
-            double aLeftd = (double)aLeft;
-            double aRightd = (double)aRight;
-            double diffMid = Math.Max(aLeftd, aRightd) - Math.Min(aLeftd, aRightd);
-            double diffOverlap = 1 - Math.Max(aLeftd, aRightd) + Math.Min(aLeftd, aRightd);
-            double newPhase;
-            if (diffMid < diffOverlap)
-                newPhase = Math.Min(aLeftd, aRightd) + diffMid / 2;
             else
-                newPhase = Math.Max(aLeftd, aRightd) + diffOverlap / 2;
-            return newPhase % 1.0;
+                return ((aLeft ?? 0) + (aRight ?? 0)) % 1.0;
         }
 
         public static double? SumAmplitude(double? aLeft, double? aRight)
@@ -64,23 +71,23 @@ namespace SoundWave.ConnectionStyle
         //    else
         //        return (1 + aValue) / 2.0;
         //}
-        public static double? ConvertFrequencyToPhasePosition(double aMomentInSeconds, double? aFrequency)
+        //public static double? ConvertFrequencyToPhasePosition(double aMomentInSeconds, double? aFrequency)
+        //{
+        //    if (aFrequency == null || aFrequency <= 0)
+        //        return null;
+        //    if (aFrequency <= 0)
+        //        return 0;
+        //    //return nfmod(aMomentInSeconds / (1 / (aFrequency ?? 1)), 1.0m);
+        //    return (aMomentInSeconds / (1/(aFrequency ?? 1))) % 1.0;
+        //}
+        public static double ConvertFrequencyToPhaseChange(double aSampleStepDuration, double? aFrequency)
         {
             if (aFrequency == null || aFrequency <= 0)
-                return null;
+                return 0;
             if (aFrequency <= 0)
                 return 0;
-            //return nfmod(aMomentInSeconds / (1 / (aFrequency ?? 1)), 1.0m);
-            return (aMomentInSeconds / (1/(aFrequency ?? 1))) % 1.0;
+            return (aSampleStepDuration / (1 / (aFrequency ?? 1))) % 1.0;
         }
-        //public static double ConvertFrequencySpanToPhaseChange(double aSampleStepDuration, double? aFrequencySpan)
-        //{
-        //    if (aFrequencySpan == null || aFrequencySpan <= 0)
-        //        return 0;
-        //    if (aFrequencySpan <= 0)
-        //        return 0m;
-        //    return (aSampleStepDuration / (1 / (aFrequencySpan ?? 1))) % 1.0m;
-        //}
         //public static double? RecalcPhase(double? aValue, double? aPhase)
         //{
         //    if (aValue == null)
@@ -91,7 +98,7 @@ namespace SoundWave.ConnectionStyle
         //}
         public static Output operator +(Output aLeft, Output aRight)
         {
-            return new Output(SumAmplitude(aLeft.Value, aRight.Value), SumPhase(aLeft.PhaseChange, aRight.PhaseChange));
+            return new Output(SumAmplitude(aLeft.Value, aRight.Value), SumPhaseChange(aLeft.PhaseChange, aRight.PhaseChange));
         }
 
         public static bool operator ==(Output output1, Output output2)
