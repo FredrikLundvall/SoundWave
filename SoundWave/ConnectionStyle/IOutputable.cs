@@ -8,7 +8,7 @@ namespace SoundWave.ConnectionStyle
 {
     public interface IOutputable
     {
-        Output CalcOutput(decimal aMomentInSeconds, decimal aSampleStepDuration);
+        Output CalcOutput(double aMomentInSeconds, double aSampleStepDuration);
         IOutputable SignalOutput();
     }
 }

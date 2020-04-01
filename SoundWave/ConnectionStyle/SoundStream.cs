@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using raminrahimzada;
 
 namespace SoundWave.ConnectionStyle
 {
@@ -11,7 +10,7 @@ namespace SoundWave.ConnectionStyle
         protected readonly int fSampleBits = 16;
         protected readonly int fSampleChannels = 1;
         protected readonly Dictionary<int, List<IOutputable>> fValueOutputListeners;
-        public SoundStream(decimal aDurationSeconds, int aSampleRateHz, int aSampleBits = 16, int aSampleChannels = 1) : base(new byte[(int)Math.Ceiling(aDurationSeconds * aSampleRateHz) * (aSampleBits / 8) * aSampleChannels], true)
+        public SoundStream(double aDurationSeconds, int aSampleRateHz, int aSampleBits = 16, int aSampleChannels = 1) : base(new byte[(int)Math.Ceiling(aDurationSeconds * aSampleRateHz) * (aSampleBits / 8) * aSampleChannels], true)
         {
             fSampleRateHz = aSampleRateHz;
             fSampleBits = aSampleBits;
@@ -25,9 +24,9 @@ namespace SoundWave.ConnectionStyle
         public void WriteAll()
         {
             this.Position = 0;
-            decimal sampleStepDuration = GetTimeForOneSample();
+            double sampleStepDuration = GetTimeForOneSample();
             int numberOfSamples = (int)this.Length / ((fSampleBits / 8) * fSampleChannels);
-            decimal momentInSeconds = 0;
+            double momentInSeconds = 0;
             Output value;
             for(long i = 0; i < numberOfSamples; i++)
             {
@@ -44,9 +43,9 @@ namespace SoundWave.ConnectionStyle
             }
             this.Position = 0;
         }
-        public byte[] ConvertToBytes(decimal aValue)
+        public byte[] ConvertToBytes(double aValue)
         {
-            decimal limitedValue = DecimalMath.Min(DecimalMath.Max(aValue, -1.0m), 1.0m);
+            double limitedValue = Math.Min(Math.Max(aValue, -1.0), 1.0);
             byte[] bytes;
             if (fSampleBits == 8)
             {
@@ -73,9 +72,9 @@ namespace SoundWave.ConnectionStyle
                 throw new ArgumentOutOfRangeException("Bits have to be 8, 16, 32, 64");
             return bytes;
         }
-        public decimal GetTimeForOneSample()
+        public double GetTimeForOneSample()
         {
-            return 1.0m / fSampleRateHz;
+            return 1.0 / fSampleRateHz;
         }
         public void SignalInput(int aChannel, IOutputable aValueOuputable)
         {

@@ -19,7 +19,7 @@ namespace SoundWave.ConnectionStyle
         {
             fValueOutputListeners.Add(aValueOutputable);
         }
-        public Output CalcOutput(decimal aMomentInSeconds, decimal aSampleStepDuration)
+        public Output CalcOutput(double aMomentInSeconds, double aSampleStepDuration)
         {
             Output modifiedValue = fAddToOutput;
             foreach (var valueOutput in fValueOutputListeners)

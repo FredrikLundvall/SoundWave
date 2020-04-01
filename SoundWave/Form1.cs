@@ -22,7 +22,7 @@ namespace SoundWave
         }
         private IWaveProvider GetProvider()
         {
-            //TODO: double or decimal, what is best?
+            //TODO: double or double, what is best?
             SoundPitch playbackRate = new SoundPitch(48000);
             int playbackBits = 32;
             int playbackChannels = 2;
@@ -106,7 +106,7 @@ namespace SoundWave
             int playbackRate = 48000;
             int playbackBits = 32;
             int playbackChannels = 2;
-            decimal playbackDuration = 2; //seconds
+            double playbackDuration = 2; //seconds
 
             var soundStream = new SoundStream(playbackDuration, playbackRate, playbackBits, playbackChannels);
 
@@ -151,14 +151,14 @@ namespace SoundWave
 
 
             SoundBoxWave waveFM = new SoundBoxWave();
-            SoundBoxFrequency frequencyFM = new SoundBoxFrequency(10.0m);
-            SoundBoxAmplitude amplitudeFM = new SoundBoxAmplitude(1.0m);
+            SoundBoxFrequency frequencyFM = new SoundBoxFrequency(10.0);
+            SoundBoxAmplitude amplitudeFM = new SoundBoxAmplitude(1.0);
             waveFM.FrequencyInput(frequencyFM.SignalOutput());
             waveFM.AmplitudeInput(amplitudeFM.SignalOutput());
 
             SoundBoxWave wave = new SoundBoxWave();
-            SoundBoxFrequency frequency = new SoundBoxFrequency(1m, 1m);
-            SoundBoxAmplitude amplitude = new SoundBoxAmplitude(1.0m);
+            SoundBoxFrequency frequency = new SoundBoxFrequency(1, 1);
+            SoundBoxAmplitude amplitude = new SoundBoxAmplitude(1.0);
             frequency.FrequencyFMInput(waveFM.SignalOutput());
             wave.FrequencyInput(frequency.SignalOutput());
             wave.AmplitudeInput(amplitude.SignalOutput());

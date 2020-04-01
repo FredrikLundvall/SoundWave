@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using raminrahimzada;
 
 namespace SoundWave.ConnectionStyle
 {
@@ -19,7 +18,7 @@ namespace SoundWave.ConnectionStyle
         {
             fFrequencyOutputListeners.Add(aFrequencyOutputable);
         }
-        public Output CalcOutput(decimal aMomentInSeconds, decimal aSampleStepDuration)
+        public Output CalcOutput(double aMomentInSeconds, double aSampleStepDuration)
         {
             Output valueFrequency = new Output(null, null);
             foreach (var frequencyOutput in fFrequencyOutputListeners)
@@ -31,7 +30,7 @@ namespace SoundWave.ConnectionStyle
             {
                 valueAmplitude = valueAmplitude + amplitudeOutput.CalcOutput(aMomentInSeconds, aSampleStepDuration);
             }
-            Output returnValue = new Output((DecimalMath.Sin(((valueFrequency.Phase ?? 0m)) * DecimalMath.PIx2) * (valueAmplitude.Value ?? 1)), valueFrequency.Phase);
+            Output returnValue = new Output((Math.Sin(((valueFrequency.Phase ?? 0)) * Math.PIx2) * (valueAmplitude.Value ?? 1)), valueFrequency.Phase);
             return returnValue;
         }
         public IOutputable SignalOutput()

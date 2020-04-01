@@ -23,7 +23,7 @@ namespace SoundWave.ConnectionStyle
         {
             fValueOutputListeners.Add(aValueOutputable);
         }
-        virtual public Output CalcOutput(decimal aMomentInSeconds, decimal aSampleStepDuration)
+        virtual public Output CalcOutput(double aMomentInSeconds, double aSampleStepDuration)
         {
             Output valueFrequency = new Output(null, null);
             foreach (var frequencyOutput in fFrequencyOutputListeners)
@@ -41,7 +41,7 @@ namespace SoundWave.ConnectionStyle
                 valueAmplitude += amplitudeOutput.CalcOutput(aMomentInSeconds, aSampleStepDuration);
             }
             //return ConnectionStyle.Output.MultiplyAmplitude(value, valueAmplitude.Value) + new Output(null, valueFrequency.Phase);
-            return ConnectionStyle.Output.MultiplyAmplitude(valueFrequency, 0.01m);
+            return ConnectionStyle.Output.MultiplyAmplitude(valueFrequency, 0.01);
         }
         public IOutputable SignalOutput()
         {

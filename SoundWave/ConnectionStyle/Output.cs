@@ -3,21 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using raminrahimzada;
 
 namespace SoundWave.ConnectionStyle
 {
     public class Output : IEquatable<Output>
     {
-        public readonly decimal? Value;
-        public readonly decimal? Phase;
-        public Output(decimal? aValue, decimal? aPhase)
+        public readonly double? Value;
+        public readonly double? Phase;
+        public Output(double? aValue, double? aPhase)
         {
             Value = aValue;
             Phase = aPhase;
         }
 
-        public static decimal? SumPhase(decimal? aLeft, decimal? aRight)
+        public static double? SumPhase(double? aLeft, double? aRight)
         {
             if (aLeft == null && aRight == null)
                 return null;
@@ -25,19 +24,19 @@ namespace SoundWave.ConnectionStyle
                 return aLeft;
             if (aRight != null && aLeft == null)
                 return aRight;
-            decimal aLeftd = (decimal)aLeft;
-            decimal aRightd = (decimal)aRight;
-            decimal diffMid = Math.Max(aLeftd, aRightd) - Math.Min(aLeftd, aRightd);
-            decimal diffOverlap = 1 - Math.Max(aLeftd, aRightd) + Math.Min(aLeftd, aRightd);
-            decimal newPhase;
+            double aLeftd = (double)aLeft;
+            double aRightd = (double)aRight;
+            double diffMid = Math.Max(aLeftd, aRightd) - Math.Min(aLeftd, aRightd);
+            double diffOverlap = 1 - Math.Max(aLeftd, aRightd) + Math.Min(aLeftd, aRightd);
+            double newPhase;
             if (diffMid < diffOverlap)
                 newPhase = Math.Min(aLeftd, aRightd) + diffMid / 2;
             else
                 newPhase = Math.Max(aLeftd, aRightd) + diffOverlap / 2;
-            return newPhase % 1.0m;
+            return newPhase % 1.0;
         }
 
-        public static decimal? SumAmplitude(decimal? aLeft, decimal? aRight)
+        public static double? SumAmplitude(double? aLeft, double? aRight)
         {
             if (aLeft == null && aRight == null)
                 return null;
@@ -45,7 +44,7 @@ namespace SoundWave.ConnectionStyle
                 return (aLeft ?? 0) + (aRight ?? 0);
         }
 
-        //public static decimal? SumFrequency(decimal? aLeft, decimal? aRight)
+        //public static double? SumFrequency(double? aLeft, double? aRight)
         //{
         //    if (aLeft == null && aRight == null)
         //        return null;
@@ -56,7 +55,7 @@ namespace SoundWave.ConnectionStyle
         //    return ((aLeft ?? 0) + (aRight ?? 0))  / 2.0;
         //}
 
-        //public static decimal? ConvertToAmplifier(decimal? aValue)
+        //public static double? ConvertToAmplifier(double? aValue)
         //{
         //    if (aValue == null)
         //        return null;
@@ -65,16 +64,16 @@ namespace SoundWave.ConnectionStyle
         //    else
         //        return (1 + aValue) / 2.0;
         //}
-        public static decimal? ConvertFrequencyToPhasePosition(decimal aMomentInSeconds, decimal? aFrequency)
+        public static double? ConvertFrequencyToPhasePosition(double aMomentInSeconds, double? aFrequency)
         {
             if (aFrequency == null || aFrequency <= 0)
                 return null;
             if (aFrequency <= 0)
-                return 0m;
+                return 0;
             //return nfmod(aMomentInSeconds / (1 / (aFrequency ?? 1)), 1.0m);
-            return (aMomentInSeconds / (1/(aFrequency ?? 1))) % 1.0m;
+            return (aMomentInSeconds / (1/(aFrequency ?? 1))) % 1.0;
         }
-        //public static decimal ConvertFrequencySpanToPhaseChange(decimal aSampleStepDuration, decimal? aFrequencySpan)
+        //public static double ConvertFrequencySpanToPhaseChange(double aSampleStepDuration, double? aFrequencySpan)
         //{
         //    if (aFrequencySpan == null || aFrequencySpan <= 0)
         //        return 0;
@@ -82,7 +81,7 @@ namespace SoundWave.ConnectionStyle
         //        return 0m;
         //    return (aSampleStepDuration / (1 / (aFrequencySpan ?? 1))) % 1.0m;
         //}
-        //public static decimal? RecalcPhase(decimal? aValue, decimal? aPhase)
+        //public static double? RecalcPhase(double? aValue, double? aPhase)
         //{
         //    if (aValue == null)
         //        return null;
@@ -105,12 +104,12 @@ namespace SoundWave.ConnectionStyle
             return !(output1 == output2);
         }
 
-        public static Output MultiplyAmplitude(Output aOutput, decimal? aAmplitude)
+        public static Output MultiplyAmplitude(Output aOutput, double? aAmplitude)
         {
             return new Output(aOutput.Value * aAmplitude, aOutput.Phase);
         }
 
-        static public decimal nfmod(decimal a, decimal b)
+        static public double nfmod(double a, double b)
         {
             return a - b * Math.Floor(a / b);
         }
@@ -128,15 +127,15 @@ namespace SoundWave.ConnectionStyle
 
         public bool Equals(Output other)
         {
-            return EqualityComparer<decimal?>.Default.Equals(Decimal.Round(Value ?? 0, 10), Decimal.Round(other.Value ?? 0, 0)) &&
-                   EqualityComparer<decimal?>.Default.Equals(Decimal.Round(Phase ?? 0, 10), Decimal.Round(other.Phase ?? 0,10));
+            return EqualityComparer<double?>.Default.Equals(Math.Round(Value ?? 0, 10), Math.Round(other.Value ?? 0, 0)) &&
+                   EqualityComparer<double?>.Default.Equals(Math.Round(Phase ?? 0, 10), Math.Round(other.Phase ?? 0,10));
         }
 
         public override int GetHashCode()
         {
             var hashCode = 981352850;
-            hashCode = hashCode * -1521134295 + EqualityComparer<decimal?>.Default.GetHashCode(Value);
-            hashCode = hashCode * -1521134295 + EqualityComparer<decimal?>.Default.GetHashCode(Phase);
+            hashCode = hashCode * -1521134295 + EqualityComparer<double?>.Default.GetHashCode(Value);
+            hashCode = hashCode * -1521134295 + EqualityComparer<double?>.Default.GetHashCode(Phase);
             return hashCode;
         }
     }
