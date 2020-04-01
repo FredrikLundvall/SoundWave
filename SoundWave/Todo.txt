@@ -1,2 +1,2 @@
 ﻿Add more testcases
-Check math for converting frequency span to phase change.
+Add state for the phase to be able to support frequency modulation

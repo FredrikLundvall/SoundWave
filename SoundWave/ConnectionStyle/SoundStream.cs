@@ -36,7 +36,7 @@ namespace SoundWave.ConnectionStyle
                     value = new Output(null, null);
                     foreach (var valueOutput in fValueOutputListeners[channel])
                     {
-                        value += valueOutput.CalcOutput(momentInSeconds);
+                        value += valueOutput.CalcOutput(momentInSeconds, sampleStepDuration);
                     }
                     Write(ConvertToBytes(value.Value ?? 0), 0, fSampleBits / 8);
                 }

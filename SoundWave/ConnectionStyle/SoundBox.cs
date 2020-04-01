@@ -23,22 +23,22 @@ namespace SoundWave.ConnectionStyle
         {
             fValueOutputListeners.Add(aValueOutputable);
         }
-        virtual public Output CalcOutput(decimal aMomentInSeconds)
+        virtual public Output CalcOutput(decimal aMomentInSeconds, decimal aSampleStepDuration)
         {
             Output valueFrequency = new Output(null, null);
             foreach (var frequencyOutput in fFrequencyOutputListeners)
             {
-                valueFrequency += frequencyOutput.CalcOutput(aMomentInSeconds);
+                valueFrequency += frequencyOutput.CalcOutput(aMomentInSeconds, aSampleStepDuration);
             }
             Output value = new Output(null, null);
             foreach (var valueOutput in fValueOutputListeners)
             {
-                value += valueOutput.CalcOutput(aMomentInSeconds);
+                value += valueOutput.CalcOutput(aMomentInSeconds, aSampleStepDuration);
             }
             Output valueAmplitude = new Output(null, null);
             foreach (var amplitudeOutput in fAmplitudeOutputListeners)
             {
-                valueAmplitude += amplitudeOutput.CalcOutput(aMomentInSeconds);
+                valueAmplitude += amplitudeOutput.CalcOutput(aMomentInSeconds, aSampleStepDuration);
             }
             //return ConnectionStyle.Output.MultiplyAmplitude(value, valueAmplitude.Value) + new Output(null, valueFrequency.Phase);
             return ConnectionStyle.Output.MultiplyAmplitude(valueFrequency, 0.01m);

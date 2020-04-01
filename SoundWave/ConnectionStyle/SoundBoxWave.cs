@@ -19,17 +19,17 @@ namespace SoundWave.ConnectionStyle
         {
             fFrequencyOutputListeners.Add(aFrequencyOutputable);
         }
-        public Output CalcOutput(decimal aMomentInSeconds)
+        public Output CalcOutput(decimal aMomentInSeconds, decimal aSampleStepDuration)
         {
             Output valueFrequency = new Output(null, null);
             foreach (var frequencyOutput in fFrequencyOutputListeners)
             {
-                valueFrequency = valueFrequency + frequencyOutput.CalcOutput(aMomentInSeconds);
+                valueFrequency = valueFrequency + frequencyOutput.CalcOutput(aMomentInSeconds, aSampleStepDuration);
             }
             Output valueAmplitude = new Output(null, null);
             foreach (var amplitudeOutput in fAmplitudeOutputListeners)
             {
-                valueAmplitude = valueAmplitude + amplitudeOutput.CalcOutput(aMomentInSeconds);
+                valueAmplitude = valueAmplitude + amplitudeOutput.CalcOutput(aMomentInSeconds, aSampleStepDuration);
             }
             Output returnValue = new Output((DecimalMath.Sin(((valueFrequency.Phase ?? 0m)) * DecimalMath.PIx2) * (valueAmplitude.Value ?? 1)), valueFrequency.Phase);
             return returnValue;

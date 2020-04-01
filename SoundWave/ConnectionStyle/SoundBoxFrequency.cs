@@ -21,17 +21,19 @@ namespace SoundWave.ConnectionStyle
         {
             fFrequencyFMOutputListeners.Add(aFrequencyOutputable);
         }
-        public Output CalcOutput(decimal aMomentInSeconds)
+        public Output CalcOutput(decimal aMomentInSeconds, decimal aSampleStepDuration)
         {
             Output valueFMFrequency = new Output(null, null);
             foreach (var frequencyFMOutput in fFrequencyFMOutputListeners)
             {
-                valueFMFrequency += frequencyFMOutput.CalcOutput(aMomentInSeconds);
+                valueFMFrequency += frequencyFMOutput.CalcOutput(aMomentInSeconds, aSampleStepDuration);
             }
-            decimal phaseSpan = 0m; 
-            if((valueFMFrequency.Value ?? 0) != 0 && fFrequencyFMSpan != 0)
-                phaseSpan = ((fFrequencyFMSpan != 0m) ? fFrequencyFMSpan / DecimalMath.PIx4 : 0m) * (valueFMFrequency.Value ?? 0);
-            return new Output(fFrequency + (fFrequencyFMSpan * valueFMFrequency.Value), Output.ConvertFrequencyToPhasePosition(aMomentInSeconds, fFrequency) + phaseSpan);
+            decimal timeSpan = 0m;
+            if ((valueFMFrequency.Value ?? 0m) != 0m && fFrequencyFMSpan != 0m)
+            {
+                timeSpan = aSampleStepDuration * valueFMFrequency.Value * fFrequencyFMSpan ?? 0m;
+            }
+            return new Output(fFrequency + (fFrequencyFMSpan * valueFMFrequency.Value), Output.ConvertFrequencyToPhasePosition(aMomentInSeconds, fFrequency));
         }
 
         public IOutputable SignalOutput()

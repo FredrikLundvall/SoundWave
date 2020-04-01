@@ -151,13 +151,13 @@ namespace SoundWave
 
 
             SoundBoxWave waveFM = new SoundBoxWave();
-            SoundBoxFrequency frequencyFM = new SoundBoxFrequency(3.0m);
+            SoundBoxFrequency frequencyFM = new SoundBoxFrequency(10.0m);
             SoundBoxAmplitude amplitudeFM = new SoundBoxAmplitude(1.0m);
             waveFM.FrequencyInput(frequencyFM.SignalOutput());
             waveFM.AmplitudeInput(amplitudeFM.SignalOutput());
 
             SoundBoxWave wave = new SoundBoxWave();
-            SoundBoxFrequency frequency = new SoundBoxFrequency(220.0m, 10m);
+            SoundBoxFrequency frequency = new SoundBoxFrequency(1m, 1m);
             SoundBoxAmplitude amplitude = new SoundBoxAmplitude(1.0m);
             frequency.FrequencyFMInput(waveFM.SignalOutput());
             wave.FrequencyInput(frequency.SignalOutput());

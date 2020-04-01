@@ -74,14 +74,14 @@ namespace SoundWave.ConnectionStyle
             //return nfmod(aMomentInSeconds / (1 / (aFrequency ?? 1)), 1.0m);
             return (aMomentInSeconds / (1/(aFrequency ?? 1))) % 1.0m;
         }
-        public static decimal? ConvertFrequencyToPhaseChange(decimal? aFrequency)
-        {
-            if (aFrequency == null || aFrequency <= 0)
-                return null;
-            if (aFrequency <= 0)
-                return 0m;
-            return 1 / (aFrequency ?? 1);
-        }
+        //public static decimal ConvertFrequencySpanToPhaseChange(decimal aSampleStepDuration, decimal? aFrequencySpan)
+        //{
+        //    if (aFrequencySpan == null || aFrequencySpan <= 0)
+        //        return 0;
+        //    if (aFrequencySpan <= 0)
+        //        return 0m;
+        //    return (aSampleStepDuration / (1 / (aFrequencySpan ?? 1))) % 1.0m;
+        //}
         //public static decimal? RecalcPhase(decimal? aValue, decimal? aPhase)
         //{
         //    if (aValue == null)

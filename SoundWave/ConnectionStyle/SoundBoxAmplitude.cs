@@ -13,7 +13,7 @@ namespace SoundWave.ConnectionStyle
         {
             fAmplitude = aAmplitude;
         }
-        public Output CalcOutput(decimal aMomentInSeconds)
+        public Output CalcOutput(decimal aMomentInSeconds, decimal aSampleStepDuration)
         {
             return new Output(fAmplitude, null);
         }
