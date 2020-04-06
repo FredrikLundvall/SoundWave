@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SoundWave.ConnectionStyle
 {
-    public class SoundBoxAmplitude : IOutputable
+    public class SoundBoxAmplitude : IOutputable, IConnectable
     {
         protected readonly double fAmplitude;
         public SoundBoxAmplitude(double aAmplitude)
@@ -22,5 +22,4 @@ namespace SoundWave.ConnectionStyle
             return this;
         }
     }
-
 }

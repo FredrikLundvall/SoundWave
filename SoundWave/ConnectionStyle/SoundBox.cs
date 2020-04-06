@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SoundWave.ConnectionStyle
 {
-    public class SoundBox: IOutputable
+    public class SoundBox: IOutputable, IConnectable
     {
         protected readonly List<IOutputable> fValueOutputListeners = new List<IOutputable>();
         protected readonly List<IOutputable> fAmplitudeOutputListeners = new List<IOutputable>();

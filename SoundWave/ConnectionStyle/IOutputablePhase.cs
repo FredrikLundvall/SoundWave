@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace SoundWave.ConnectionStyle
 {
-    public interface IOutputable
+    public interface IOutputablePhase
     {
-        Output CalcOutput(double aMomentInSeconds, double aSampleStepDuration);
+        Output CalcOutput(double aMomentInSeconds, double aSampleStepDuration, double aCurrentPhase);
     }
 }

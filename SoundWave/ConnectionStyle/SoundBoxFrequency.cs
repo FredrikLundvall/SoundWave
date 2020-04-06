@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SoundWave.ConnectionStyle
 {
-    public class SoundBoxFrequency : IOutputable
+    public class SoundBoxFrequency : IOutputable, IConnectable
     {
         protected readonly double fFrequency;
         protected readonly double fFrequencyFMSpan;

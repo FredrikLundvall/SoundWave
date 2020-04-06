@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SoundWave.ConnectionStyle
 {
-    public class ModifierAddValue : IOutputable
+    public class ModifierAddValue : IOutputable, IConnectable
     {
         protected readonly List<IOutputable> fValueOutputListeners = new List<IOutputable>();
         protected readonly Output fAddToOutput;
