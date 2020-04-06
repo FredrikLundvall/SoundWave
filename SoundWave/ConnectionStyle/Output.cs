@@ -80,13 +80,11 @@ namespace SoundWave.ConnectionStyle
         //    //return nfmod(aMomentInSeconds / (1 / (aFrequency ?? 1)), 1.0m);
         //    return (aMomentInSeconds / (1/(aFrequency ?? 1))) % 1.0;
         //}
-        public static double ConvertFrequencyToPhaseChange(double aSampleStepDuration, double? aFrequency)
+        public static double ConvertFrequencyToPhaseChange(double aSampleStepDuration, double aFrequency)
         {
-            if (aFrequency == null || aFrequency <= 0)
-                return 0;
             if (aFrequency <= 0)
                 return 0;
-            return (aSampleStepDuration / (1 / (aFrequency ?? 1))) % 1.0;
+            return (aSampleStepDuration * aFrequency);// % 1.0;
         }
         //public static double? RecalcPhase(double? aValue, double? aPhase)
         //{

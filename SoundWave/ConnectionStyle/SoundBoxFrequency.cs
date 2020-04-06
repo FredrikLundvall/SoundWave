@@ -27,7 +27,8 @@ namespace SoundWave.ConnectionStyle
             {
                 valueFMFrequency += frequencyFMOutput.CalcOutput(aMomentInSeconds, aSampleStepDuration);
             }
-            return new Output(fFrequency + (fFrequencyFMSpan * valueFMFrequency.Value), Output.ConvertFrequencyToPhaseChange(aSampleStepDuration, fFrequency + (fFrequencyFMSpan * valueFMFrequency.Value)));
+            Output returnValue = new Output(null, Output.ConvertFrequencyToPhaseChange(aSampleStepDuration, fFrequency + (fFrequencyFMSpan * valueFMFrequency.Value ?? 0)) + (valueFMFrequency.PhaseChange ?? 0));
+            return returnValue;
         }
 
         public IOutputable SignalOutput()
