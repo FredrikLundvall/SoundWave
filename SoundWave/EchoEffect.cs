@@ -8,7 +8,7 @@ namespace SoundWave
 {
     public class EchoEffect : IEffect
     {
-        private static readonly List<SampleValue> fCachedValues = new List<SampleValue>(6400);
+        private readonly List<SampleValue> fCachedValues = new List<SampleValue>(6400);
         protected readonly double fStrength;
         protected readonly int fNumberOfValues;
         public EchoEffect(double aStrength = 1, int aNumberOfValues = 5000)

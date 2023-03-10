@@ -111,7 +111,7 @@ namespace SoundWave
             var soundStream = new SoundStream(playbackDuration, playbackRate, playbackBits, playbackChannels);
 
             SoundBoxWave waveFM = new SoundBoxWave(0, 4, 0);
-            SoundBoxFrequency frequencyFM = new SoundBoxFrequency(2.0);
+            SoundBoxFrequency frequencyFM = new SoundBoxFrequency(60.0);
             SoundBoxAmplitude amplitudeFM = new SoundBoxAmplitude(1.0);
             waveFM.FrequencyInput(frequencyFM.SignalOutput());
             waveFM.AmplitudeInput(amplitudeFM.SignalOutput());
@@ -124,7 +124,7 @@ namespace SoundWave
             wave.AmplitudeInput(amplitude.SignalOutput());
 
             SoundBoxWave waveFM2 = new SoundBoxWave(0, 4, 0.5);
-            SoundBoxFrequency frequencyFM2 = new SoundBoxFrequency(2.9);
+            SoundBoxFrequency frequencyFM2 = new SoundBoxFrequency(5.9);
             SoundBoxAmplitude amplitudeFM2 = new SoundBoxAmplitude(1.0);
             waveFM2.FrequencyInput(frequencyFM.SignalOutput());
             waveFM2.AmplitudeInput(amplitudeFM.SignalOutput());
@@ -149,7 +149,7 @@ namespace SoundWave
         private void btnPlaySound_Click(object sender, EventArgs e)
         {
             WaveOut waveOut = new WaveOut(this.Handle);
-            waveOut.Init(GetProvider2());
+            waveOut.Init(GetProvider());
             waveOut.Play();
         }
 
