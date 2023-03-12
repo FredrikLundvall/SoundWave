@@ -111,7 +111,8 @@ namespace SoundWave.ConnectionStyle
 
         public static Output MultiplyAmplitude(Output aOutput, double? aAmplitude)
         {
-            return new Output(aOutput.Value * aAmplitude, aOutput.PhaseChange);
+            var returnValue = new Output((aOutput.Value ?? 1.0) * aAmplitude, aOutput.PhaseChange);
+            return returnValue;
         }
 
         static public double nfmod(double a, double b)

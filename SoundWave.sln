@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32929.386
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoundWave", "SoundWave\SoundWave.csproj", "{7B8EADD4-FE57-4294-8B4F-A5940604E31E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSoundWave", "TestSoundWave\TestSoundWave.csproj", "{1DD69B36-F029-421F-942E-7EB92DA6066C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSoundBox", "TestSoundWave\TestSoundBox.csproj", "{1DD69B36-F029-421F-942E-7EB92DA6066C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,5 +44,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {44B1B151-1DA2-4CDA-9A75-EC6FCC2B2AF7}
 	EndGlobalSection
 EndGlobal

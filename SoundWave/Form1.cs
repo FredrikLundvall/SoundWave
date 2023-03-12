@@ -145,11 +145,43 @@ namespace SoundWave
             soundStream.WriteAll();
             return new RawSourceWaveStream(soundStream, new WaveFormat(playbackRate, playbackBits, playbackChannels));
         }
+        private IWaveProvider GetProvider3()
+        {
+            int playbackRate = 48000;
+            int playbackBits = 32;
+            int playbackChannels = 2;
+            double playbackDuration = 4; //seconds
+
+            var soundStream = new SoundStream(playbackDuration, playbackRate, playbackBits, playbackChannels);
+            SoundBoxWave waveFM = new SoundBoxWave(0, 4, 0);
+            SoundBoxFrequency frequencyFM = new SoundBoxFrequency(20.0);
+            SoundBoxAmplitude amplitudeAM = new SoundBoxAmplitude(1.0);
+            //waveFM.FrequencyInput(frequencyFM.SignalOutput());
+            waveFM.AmplitudeInput(amplitudeAM.SignalOutput());
+
+            SoundBoxWave wave = new SoundBoxWave(0, 4, 0);
+            SoundBoxFrequency frequency = new SoundBoxFrequency((double)numFrequency.Value / 1000.0, 90);
+            //frequency.FrequencyFMInput(frequencyFM.SignalOutput());
+            SoundBoxAmplitude amplitude = new SoundBoxAmplitude(1.0);
+            wave.FrequencyInput(frequency.SignalOutput());
+            wave.AmplitudeInput(amplitude.SignalOutput());
+
+            SoundBoxWave wave2 = new SoundBoxWave(0, 4, 0);
+            SoundBoxFrequency frequency2 = new SoundBoxFrequency((double)numFrequency.Value / 1000.0);
+            SoundBoxAmplitude amplitude2 = new SoundBoxAmplitude(1.0);
+            wave2.FrequencyInput(frequency2.SignalOutput());
+            wave2.AmplitudeInput(amplitude2.SignalOutput());
+
+            soundStream.SignalInput(1, wave.SignalOutput());
+            //soundStream.SignalInput(2, wave2.SignalOutput());
+            soundStream.WriteAll();
+            return new RawSourceWaveStream(soundStream, new WaveFormat(playbackRate, playbackBits, playbackChannels));
+        }
 
         private void btnPlaySound_Click(object sender, EventArgs e)
         {
             WaveOut waveOut = new WaveOut(this.Handle);
-            waveOut.Init(GetProvider());
+            waveOut.Init(GetProvider3());
             waveOut.Play();
         }
 
@@ -157,7 +189,7 @@ namespace SoundWave
         {
             //WaveFileWriter waveFileWriter = new WaveFileWriter("file.wav", GetProvider().WaveFormat);
             //WaveStream sourceStream = new NullWaveStream(GetProvider().WaveFormat, 10000);
-            WaveFileWriter.CreateWaveFile("file.wav", GetProvider2());
+            WaveFileWriter.CreateWaveFile("file.wav", GetProvider3());
         }
     }
 }

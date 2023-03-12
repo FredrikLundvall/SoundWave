@@ -1,2 +1,11 @@
 ﻿Add more testcases
 Add state for the phase to be able to support frequency modulation
+
+Continue with the ConnectionStyle (or simpiyfy it)
+The calculation in SSoundBoxFrequency is wrong:
+fFrequency + (fFrequencyFMSpan * valueFMFrequency.Value ?? 0)) + (valueFMFrequency.PhaseChange ?? 0)
+valueFMFrequency.Value is allways null
+Probably move the FrequencyFMSpan from the SoundBoxFrequency constructor to the FrequencyFMInput()
+Add more gui to be able to test it more.
+Add protection for infinity loops (feedback loops)
+Add instruments with timbre settings connected to key and speed and sustain aso.

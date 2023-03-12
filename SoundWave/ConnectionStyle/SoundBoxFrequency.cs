@@ -27,6 +27,9 @@ namespace SoundWave.ConnectionStyle
             {
                 valueFMFrequency += frequencyFMOutput.CalcOutput(aMomentInSeconds, aSampleStepDuration);
             }
+            //valueFMFrequency.Value är null
+            //valueFMFrequency.PhaseChange är samma hela tiden
+            //Borde valueFMFrequency.Value ha ett värde?
             Output returnValue = new Output(null, Output.ConvertFrequencyToPhaseChange(aSampleStepDuration, fFrequency + (fFrequencyFMSpan * valueFMFrequency.Value ?? 0)) + (valueFMFrequency.PhaseChange ?? 0));
             return returnValue;
         }
